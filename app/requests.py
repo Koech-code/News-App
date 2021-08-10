@@ -1,53 +1,48 @@
-import  urllib.request, json
-from models import Articles, Sources
-import os
-# import requests
+from app import app
+import urllib.request,json
+from .models import source
 
-api_key=None
-source_url=None
-articles_url=None
+Source = source.Source
+# Getting api key
+api_key = app.config['SOURCE_API_KEY']
 
-def configure_request(app):
-    global api_key,source_url,articles_url
-    api_key=app.config['NEWS_API_KEY']
-    source_url=app.config['NEWS_API_BASE_URL']
-    articles_url=app.config['ARTICLES_API_URL']
+# Getting the movie base url
+base_url = app.config['NEWS_API_BASE_URL']
 
-def get_sources(category):
+def get_source():
     '''
-    A function to get news sources by categories
+    Function that gets the json response to our url request
     '''
+    # base_url='https://newsapi.org/v2/top-headlines/sources?apiKey={}'
+    get_source_url = base_url.format(api_key)
 
-    src_url= source_url.format(category, api_key)
+    with urllib.request.urlopen(get_source_url ) as url:
+        get_source_data = url.read()
+        get_sources_response = json.loads( get_source_data)
 
-    with urllib.request.urlopen(src_url) as url:
-        sources_data=url.read()
-        get_repsonse=json.loads(sources_data)
+        source_results = None
 
-        sources_result=None
-
-        if get_repsonse['sources']:
-            sources_output=get_repsonse['sources']
-            sources_result=process_news(sources_output)
-
-    return sources_result
-
-def process_news(sourceList):
-    sources_result=[]
-    for source in sourceList:
-        id=source.get('id')
-        name=source.get('name')
-        description=source.get('description')
-        url=source.get('url')
-        category=source.get('category')
-        language=source.get('language')
-        country=source.get('country')
-
-        new_source=Sources(id, name, description, url , category, language, country)
-        sources_result.append(new_source)
-        
-    return sources_result
+        if get_sources_response['sources']:
+            source_results_list = get_sources_response['sources']
+            source_results= process_results(source_results_list)
 
 
-        
+    return source_results
 
+def process_results(source_list):
+    '''
+    Function  that processes the movie result and transform them to a list of Objects
+    '''
+    source_results = []
+    for source_item in source_list:
+        id=source_item.get('id')
+        name=source_item.get('name')
+        description=source_item.get('description')
+        url=source_item.get('url')
+        category=source_item.get('category')
+        language=source_item.get('language')
+       
+        new_source=Source(id, name, description, url , category, language)
+        source_results.append(new_source)
+
+    return source_results

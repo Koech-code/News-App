@@ -7,7 +7,7 @@ for you to watch news. Isn't that cool!!!
 ## Author
 
 👤 **Author**
-- [Nixon Kipkorir Koech]
+- Nixon Kipkorir Koech
 
 - GitHub: [@Koech-code](https://github.com/Koech-code)
 
