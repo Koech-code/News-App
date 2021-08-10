@@ -1,0 +1,8 @@
+{% macro display_new_sources(sources_result) %} 
+
+    {% for news in sources_result %}
+      <li><a href="articles/{{news.id}}">{{ news.name }}</a></li>
+      <p> {{news.description}} </p>
+    {% endfor %}
+
+{% endmacro %}  
