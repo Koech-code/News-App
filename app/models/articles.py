@@ -4,7 +4,8 @@ class Articles:
     This is my sources class which helps create instances of news sources
     '''
 
-    def __init__(self, author, title, description, url, urlToImage, publishedAt):
+    def __init__(self, source, author, title, description, url, urlToImage, publishedAt):
+        self.source=source
         self.author=author
         self.title=title
         self.description=description
