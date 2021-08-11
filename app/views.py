@@ -24,12 +24,12 @@ def source(source_id):
     '''
     return render_template('source.html',id = source_id)
 
-@app.route('/articles/<id>')
-def sourceArticles(id):
+@app.route('/article/<id>')
+def article(id):
     all_articles = articles_source(id)
     print(all_articles)
     source = id
-    return render_template('articles.html', articles = all_articles, source = source)
+    return render_template('article.html', articles = all_articles, source = source)
 
 @app.route('/News-Articles')
 def NewsArticles():
@@ -40,5 +40,5 @@ def NewsArticles():
     health_articles = get_articles('health')
     education_articles = get_articles('technology')
     
-    return render_template('articles.html',health=health_articles, tech =education_articles)
+    return render_template('article.html',health=health_articles, tech =education_articles)
 

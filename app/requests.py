@@ -55,7 +55,6 @@ def process_results(source_list):
 def get_articles(article):
 
     articles_url = article_url.format(article,api_key)
-    # print(art_url)
     with urllib.request.urlopen(articles_url) as url:
         articles_data = url.read()
         articles_response = json.loads(articles_data)

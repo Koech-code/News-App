@@ -1,10 +1,16 @@
-/* body {
+body {
     background-color: #475657;
-} */
-#sources {
-    font-size: 30px;
+}
+
+#source {
+    display: flex;
+    text-align: center;
 }
 
 h2 {
-    background-color: cadetblue;
+    background-color: red;
+}
+
+img {
+    border-radius: 20px;
 }
