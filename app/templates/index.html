@@ -30,17 +30,19 @@
     {{ super() }}
     <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
 {% endblock %}
+
 {% block content %}
 
-<div class="container-fluid" id="allsources" >
-    <div class="overlay">
-        <h2 class="text-center font-weight-bold headers" >General News</h2>
-        {{ macro.display_new_sources(general) }}
-        <h2 class="text-center font-weight-bold headers" > Business News</h2>
-        {{ macro.display_new_sources(business) }}
-        <h2 class="text-center font-weight-bold headers" > Technology news </h2>
-        {{ macro.display_new_sources(technology) }}
+    <div class="container-fluid" id="allsources" >
+        <div class="overlay">
+            <h2 class="text-center font-weight-bold headers" >General News</h2>
+            {{ macro.display_new_sources(general) }}
+            <h2 class="text-center font-weight-bold headers" > Business News</h2>
+            {{ macro.display_new_sources(business) }}
+            <h2 class="text-center font-weight-bold headers" > Technology news </h2>
+            {{ macro.display_new_sources(technology) }}
+        </div>
     </div>
-</div>
+
 
 {% endblock %}
