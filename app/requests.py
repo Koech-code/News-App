@@ -1,17 +1,20 @@
-from app import app
+# from app import app
 import urllib.request,json
-from .models import source, articles
+from .models import Source, Articles
 
+# Articles=articles.Articles
+# Source = source.Source
 
-Articles=articles.Articles
-Source = source.Source
-# Getting api key
-api_key = app.config['SOURCE_API_KEY']
+api_key = None
+base_url = None
+article_url= None
 
-# Getting the movie base url
-base_url = app.config['NEWS_API_BASE_URL']
+def configure_request(app):
+    global api_key,base_url,article_url
+    api_key = app.config['SOURCE_API_KEY']
+    base_url = app.config['NEWS_API_BASE_URL']
+    article_url= app.config['NEWS_ARTICLES_API_URL']
 
-article_url= app.config['NEWS_ARTICLES_API_URL']
 
 def get_source(category):
     '''
@@ -20,7 +23,7 @@ def get_source(category):
     # base_url='https://newsapi.org/v2/top-headlines/sources?apiKey={}'
     get_source_url = base_url.format(category, api_key)
 
-    with urllib.request.urlopen(get_source_url ) as url:
+    with urllib.request.urlopen(get_source_url) as url:
         get_source_data = url.read()
         get_sources_response = json.loads( get_source_data)
 
@@ -45,8 +48,9 @@ def process_results(source_list):
         url=source_item.get('url')
         category=source_item.get('category')
         language=source_item.get('language')
+        country=source_item.get('country')
        
-        new_source=Source(id, name, description, url , category, language)
+        new_source=Source(id, name, description, url , category, language,country)
         source_results.append(new_source)
 
     return source_results
