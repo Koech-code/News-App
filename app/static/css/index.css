@@ -1,14 +1,10 @@
 body {
-    background-color: #475657;
+    background-color: #b5ffe1;
 }
 
 #source {
     display: flex;
     text-align: center;
-}
-
-h2 {
-    background-color: red;
 }
 
 img {
