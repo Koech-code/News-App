@@ -30,7 +30,7 @@ for you to watch news. Isn't that cool!!!
 
 ## Live Demo
 
-[Live Demo Link]( --)
+[Live Demo Link]( https://parent-news-source.herokuapp.com/)
 
 
 ### Installation Process
